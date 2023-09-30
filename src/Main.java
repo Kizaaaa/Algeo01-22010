@@ -9,7 +9,9 @@ public class Main {
             input = home();
 			switch(input){
 				case 1:
-				
+
+				case 2:
+
 			}
         }
     }
