@@ -68,4 +68,14 @@ public class TXTReaderWriter {
 
         s.close();
     }
+
+    public static String castMatrixString(Matrix m){
+        String ret = ""; for (int i = 0; i < m.row; i++){
+            for (int j = 0; j < m.col; j++){
+                ret = ret.concat(Float.toString(m.elmt(i, j)));
+                if (j != m.col-1) ret = ret.concat(" ");
+                else ret = ret.concat("\n");
+            }
+        } return ret;
+    }
 }
