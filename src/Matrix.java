@@ -56,7 +56,7 @@ public class Matrix {
     }
 
     /* Kali baris dengan konstanta */
-    public void timeRow(int row, int k){
+    public void timeRow(int row, float k){
         for(int i=0;i<this.col;i++){
             this.element[row][i] *= k;
         }
@@ -65,7 +65,7 @@ public class Matrix {
     /* tambah baris dengan kelipatan baris lain */
     public void addRow(int row1, int row2, float k){
         for(int i=0;i<this.col;i++){
-            this.element[row][i] += this.element[row2][i]*k;
+            this.element[row1][i] += this.element[row2][i]*k;
         }
     }
 }
