@@ -9,6 +9,8 @@ public class Main {
             input = home();
 			switch(input){
 				case 1:
+					System.out.println("Sistem Persamaan Linier");
+
 
 				case 2:
 
@@ -29,6 +31,10 @@ public class Main {
 		}
 
 		return input;
+	}
+
+	public static void spl(){
+		
 	}
 
 	public static int cin(){
