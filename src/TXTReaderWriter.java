@@ -4,7 +4,8 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class TXTReaderWriter {
-    public static void readTXT(Matrix A){
+    public static Matrix readTXT(){
+        Matrix A = new Matrix(0, 0);
         Scanner s = new Scanner(System.in);
 
         // input nama file
@@ -41,8 +42,8 @@ public class TXTReaderWriter {
         } catch (FileNotFoundException err){ // kalo ada error, pesan error nya taruh buat di print
             System.out.println("error gan waktu parsing, error message: " + err);
         }
-
         s.close();
+        return A;
     }
 
     public static void writeTXT(String str){

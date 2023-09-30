@@ -23,14 +23,12 @@ public class Matrix {
     }
 
     /* Input Matrix */
-    public void readMatrix(){
-		Scanner s = new Scanner(System.in);
+    public void readMatrix(Scanner sc){
         for(int i=0;i<this.row;i++){
             for(int j=0;j<this.col;j++){
-                this.element[i][j] = s.nextFloat();
+                this.element[i][j] = sc.nextFloat();
             }
         }
-        s.close();
     }
 
     /* Print Matrix */
