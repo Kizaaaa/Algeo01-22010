@@ -9,22 +9,22 @@ public class Main {
             input = home();
 			switch(input){
 				case 1:
-					System.out.println("Sistem Persamaan Linier");
+					splHome();
 					break;
 				case 2:
-					System.out.println("Determinan");
+					detHome();
 					break;
 				case 3:
-					System.out.println("Matriks Balikan");
+					inverseHome();
 					break;
 				case 4:
-					System.out.println("Interpolasi Polinom");
+					interpolasiPolinomHome();
 					break;
 				case 5:
-					System.out.println("Interpolasi Bicubic Spine");
+					interpolasiBicubicHome();
 					break;
 				case 6:
-					System.out.println("Interpolasi Regresi Linier Berganda");
+					linearRegHome();
 					break;
 				case 7:
 					System.out.println("Have a good day! ^_^");
@@ -41,30 +41,82 @@ public class Main {
 		return input; // di sini udah sukses inputnya (valid)
 	}
 
-	public static void spl(Scanner s){ // spl gan
-		int input = 0, ipt1 = 0;
-		int result; boolean exit = false;
-		System.out.println("SISTEM PERSAMAAN LINEAR\n1. Metode eliminasi Gauss\n2.Metode eliminasi Gauss-Jordan\n3.Metode matriks balikan\n4.Kaidah cramer\n5.Kembali");
-		System.out.print("Silahkan pilih metode atau pilihan menu: "); input = cinCheck(1, 5);
-		switch (input){
-			case 1:
-				Matrix m1 = InputMatrix();
-				// gauss
-				break;
-			case 2:
-				Matrix m2 = InputMatrix();
-				
-				break;
-			case 3:
-				break;
-			case 4:
-				break;
-			case 5:
+	public static void splHome(){ // buat SPL gan
+		int input = 0;
+		boolean exit = false;
+		
+		while (exit == false){
+			System.out.println("SISTEM PERSAMAAN LINEAR\n1. Metode eliminasi Gauss\n2.Metode eliminasi Gauss-Jordan\n3.Metode matriks balikan\n4.Kaidah cramer\n5.Kembali");
+			System.out.print("Silahkan pilih metode atau pilihan menu: "); 
+			input = cinCheck(1, 5);
+			System.out.println("Opsi " + input + " telah dipilih.");
+			switch (input){
+				case 1:
+					Matrix m1 = InputMatrix();
+					// gauss
+					break;
+				case 2:
+					Matrix m2 = InputMatrix();
+					// gauss-jordan
+					break;
+				case 3:
+					Matrix m3 = InputMatrix();
+					// metoda inverse
+					break;
+				case 4:
+					Matrix m4 = InputMatrix();
+					// metoda cramer
+					break;
+				case 5:
+					exit = true;
+					break;
+			}
 		}
 	}
 
+	public static void detHome(){ // buat determinan gan
+     	System.out.println("Menu Determinan telah dipilih");
+
+		Matrix m = InputMatrix();
+		// di sini panggil determinan,
+	}
+
+	public static void inverseHome(){ // buat matriks balikan gan
+		System.out.println("Menu Matriks Balikan telah dipilih");
+
+		Matrix m = InputMatrix();
+		// di sini panggil fungsi inverse
+
+	}
+
+	public static void interpolasiPolinomHome(){ // buat interpolasi polinom gan
+		System.out.println("Menu Interpolasi Polinom telah dipilih");
+
+		Matrix m = InputMatrix();
+		// di sini panggil fungsi interpolasi polinom
+	}
+
+	public static void interpolasiBicubicHome(){ // buat interpolasi bicubic gan
+		System.out.println("Menu Interpolasi Bicubic Spine telah dipilih");
+
+		Matrix m = InputMatrix();
+		// di sini panggil fungsi interpolasi bicubic
+	}
+
+	public static void linearRegHome(){ // buat regresi linear gan
+		System.out.println("Menu Regresi Linear Berganda telah dipilih");
+
+		Matrix m = InputMatrix();
+		// di sini panggil fungsi regresi linear
+	}
+
+
+
+	// fungsi2 buat primitif
 	public static Matrix InputMatrix(){ //ini buat input matrix gan.
 		Matrix m = new Matrix(0, 0);
+
+		System.out.println("Silahkan Input Matrix yang akan diolah");
 		System.out.println("Masukkan pilihan input: (1) untuk input dari keyboard, dan (2) untuk input dari file.txt");
 		int input = cinCheck(1, 2);
 		switch (input){
@@ -135,5 +187,4 @@ public class Main {
 		s.close();
 		return input;
 	}
-
 }
