@@ -7,10 +7,11 @@ public class Interpolasi{
     }
 
     public static Matrix keyInput(Scanner sc){
-        System.out.println("Masukkan jumlah titik yang akan diinterpolasi: ");            
-        int n = sc.nextInt();
+        System.out.println("Masukkan jumlah titik yang akan diinterpolasi (minimal 1): ");            
+        int n = Main.cinMinCheck(sc, 1);
+        sc.nextLine();
         Matrix m = new Matrix(n, n+1);
-        System.out.println("Masukkan titik: \n(Format: (x0,y0), (x1,y1), ..., (xn,yn))");
+        System.out.println("Masukkan "+n+" titik: \n(Format: (x0,y0), (x1,y1), ..., (xn,yn))");
         String line=sc.nextLine(); 
         String[] points=line.split(", ");
         for (int i=0;i<m.row;i++){
@@ -19,7 +20,7 @@ public class Interpolasi{
             for (int j=0;j<m.row;j++){
                 m.set(i,j,(float)Math.pow(x,j));
             }
-            m.set(i,n+1,Float.parseFloat(xArr[2]));
+            m.set(i,n,Float.parseFloat(xArr[2]));
         }
         return m;
     }
@@ -34,13 +35,15 @@ public class Interpolasi{
             }
             mret.set(i,mret.col-1,m.element[i][1]);
         }
+        m.displayMatrix();
+        mret.displayMatrix();
         taksiran=m.elmt(m.row-1, 0);
         return mret;
     }
 
     public static void main(Scanner sc){
         Matrix interpolationMatrix;
-        float taksiran;
+        float taksiran=0;
         System.out.println("Masukkan pilihan input: (1) untuk input dari keyboard, dan (2) untuk input dari file.txt");
         int input = Main.cinCheck(sc,1,2);
         if (input==1){

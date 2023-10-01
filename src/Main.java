@@ -198,4 +198,11 @@ public class Main {
 			System.out.print("Input tidak valid, silahkan input kembali: "); input = sc.nextInt();
 		} return input;
 	}
+
+	public static int cinMinCheck(Scanner sc, int a){ // sama kayak cinCheck tapi cuma ada batas bawah
+		int input = sc.nextInt(); 
+		while((input<a)){
+			System.out.print("Input tidak valid, silahkan input kembali: "); input = sc.nextInt();
+		} return input;
+	}
 }
