@@ -1,4 +1,6 @@
 import java.util.Scanner;
+
+import javax.sound.sampled.Line;
 @SuppressWarnings("unused")
 
 public class Main { 
@@ -109,9 +111,15 @@ public class Main {
 	public static void linearRegHome(Scanner sc){ // buat regresi linear gan
 		System.out.println("Menu Regresi Linear Berganda telah dipilih");
 
-		Matrix m = InputMatrix(sc);
-		System.out.println(TXTReaderWriter.castMatrixString(m));
-		// di sini panggil fungsi regresi linear
+		// input jumlah pengujian dan jumlah titik x yang akan diuji
+		System.out.print("Jumlah pengujian: "); int row = sc.nextInt();
+		System.out.print("Masukkan jumlah titik yang diuji: "); int col = sc.nextInt()+1;
+		System.out.println("Masukkan Matriksnya di bawah ini");
+		Matrix m = new Matrix(row, col); m.readMatrix(sc);
+
+		// oper matrix ke fungsi
+		LinearReg.f(sc, m);
+
 	}
 
 
