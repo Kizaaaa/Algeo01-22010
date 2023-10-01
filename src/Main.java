@@ -95,7 +95,7 @@ public class Main {
 	public static void interpolasiPolinomHome(Scanner sc){ // buat interpolasi polinom gan
 		System.out.println("Menu Interpolasi Polinom telah dipilih");
 
-		Matrix m = InputMatrix(sc);
+		Interpolasi.main(sc);
 		// di sini panggil fungsi interpolasi polinom
 	}
 
@@ -195,6 +195,13 @@ public class Main {
 	public static int cinCheck(Scanner sc, int a, int b){ // ini buat input yang ada constrain nya
 		int input = sc.nextInt(); 
 		while((input<a)||(input>b)){
+			System.out.print("Input tidak valid, silahkan input kembali: "); input = sc.nextInt();
+		} return input;
+	}
+
+	public static int cinMinCheck(Scanner sc, int a){ // sama kayak cinCheck tapi cuma ada batas bawah
+		int input = sc.nextInt(); 
+		while((input<a)){
 			System.out.print("Input tidak valid, silahkan input kembali: "); input = sc.nextInt();
 		} return input;
 	}
