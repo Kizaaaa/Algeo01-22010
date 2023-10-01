@@ -110,6 +110,7 @@ public class Main {
 		System.out.println("Menu Regresi Linear Berganda telah dipilih");
 
 		Matrix m = InputMatrix(sc);
+		System.out.println(TXTReaderWriter.castMatrixString(m));
 		// di sini panggil fungsi regresi linear
 	}
 
@@ -161,7 +162,7 @@ public class Main {
 				} break;
 
 			case 2:
-				m = TXTReaderWriter.readTXT();
+				m = TXTReaderWriter.readTXT(sc);
 				break;
 
 		} return m;
@@ -186,7 +187,7 @@ public class Main {
 				break;
 
 			case 2:
-				m = TXTReaderWriter.readTXT();
+				m = TXTReaderWriter.readTXT(sc);
 				break;
 
 		} return m;

@@ -4,21 +4,19 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class TXTReaderWriter {
-    public static Matrix readTXT(){
+    public static Matrix readTXT(Scanner sc){
         Matrix A = new Matrix(0, 0);
-        Scanner s = new Scanner(System.in);
 
         // input nama file
         String namaFile = "";
         while (namaFile == ""){
-            System.out.print("Masukkan nama file: "); namaFile = s.nextLine();
+            System.out.print("Masukkan nama file: "); namaFile = sc.nextLine();
         } System.out.println("nama file yang dipilih: " + namaFile);
 
         // try untuk mencoba mengakses nama file
         try {
             // declare var File
-            File current = new File("..");
-            File txt = new File(current, "test\\" + namaFile);
+            File txt = new File("test\\" + namaFile);
 
             // scanner
             Scanner sizeScanner = new Scanner(txt);
@@ -27,26 +25,28 @@ public class TXTReaderWriter {
             } sizeScanner.close();
 
             // try untuk mencoba membaca string dari txt dan mengubahnya ke elemen2 matriks
-            int Arow = rowSize, Acol = 0; Scanner reader = new Scanner(txt);
+            int Arow = rowSize, Acol = 0; Scanner reader = new Scanner(txt); Scanner reader2 = new Scanner(txt);
             try {
                 for (int i = 0; i < rowSize; i++){
-                    String line = reader.nextLine();
+                    String line = reader2.nextLine();
                     String[] row = line.split(" ");
                     Acol = row.length;
                 } A = new Matrix(Arow, Acol);
                 for (int i = 0; i < rowSize; i++){
                     String line = reader.nextLine();
+                    System.out.println("seiko");
                     String[] row = line.split(" ");
                     for (int j = 0; j < Acol; j++) A.set(i, j, Float.parseFloat(row[j]));
                 }
             } finally {
                 // janlup close
+                reader2.close();
                 reader.close();
             }
         } catch (FileNotFoundException err){ // kalo ada error, pesan error nya taruh buat di print
             System.out.println("error gan waktu parsing, error message: " + err);
         }
-        s.close();
+
         return A;
     }
 
