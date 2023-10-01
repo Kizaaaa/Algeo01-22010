@@ -1,4 +1,5 @@
 import java.util.Scanner;
+@SuppressWarnings("unused")
 
 public class Main { 
     public static void main(String[] args){ // seriously? perlu kujelasin?
@@ -37,7 +38,7 @@ public class Main {
     }
 
 	public static int home(Scanner sc){ // ini home menu nya
-		System.out.print("MENU : \n1. Sistem Persamaan Linier\n2. Determinan\n3. Matriks Balikan\n4. Interpolasi Polinom\n5. Interpolasi Bicubic Spine\n6. Regresi Linier Berganda\n7.Keluar\nMasukkan pilihan(1-7):");
+		System.out.print("MENU : \n1. Sistem Persamaan Linier\n2. Determinan\n3. Matriks Balikan\n4. Interpolasi Polinom\n5. Interpolasi Bicubic Spine\n6. Regresi Linier Berganda\n7. Keluar\nMasukkan pilihan(1-7):");
 
 		int input = cinCheck(sc, 1, 7);
 		return input; // di sini udah sukses inputnya (valid)
@@ -134,25 +135,24 @@ public class Main {
 						System.out.println("Masukkan matriks A: ");
 						Matrix A = new Matrix(row, col); A.readMatrix(sc);
 
-						float[] B = new float[row];
+						Matrix B = new Matrix(row, 1);
 						System.out.println("Masukkan matriks B (ukuran baris x 1) dalam bentuk baris: ");
-						for (int i = 0; i < row; i++){
-							B[i] = sc.nextFloat();
-						}
+						B.readMatrix(sc);
 						
-						m.row = row; m.col = col+1;
+						m = new Matrix(row, col+1);
 						for (int i = 0; i < row; i++){
 							for (int j = 0; j< col; j++){
 								m.set(i, j, A.elmt(i, j));
 							}
 						} for (int i = 0; i < row; i++){
-							m.set(i, col, B[i]);
+							m.set(i, col, B.elmt(i, 0));
 						} 
 
 						break;
 					case 2:
-						System.out.print("Masukkan ukuran baris dari matriks: "); m.row = sc.nextInt();
-						System.out.print("Masukkan ukuran kolom dari matriks: "); m.col = sc.nextInt();
+						System.out.print("Masukkan ukuran baris dari matriks: ");	int row2 = sc.nextInt();
+						System.out.print("Masukkan ukuran kolom dari matriks: "); int col2 = sc.nextInt();
+						m = new Matrix(row2, col2);
 
 						System.out.println("Masukkan matriks: ");
 						m.readMatrix(sc);
@@ -176,8 +176,10 @@ public class Main {
 		switch (input){
 
 			case 1:
-				System.out.print("Masukkan ukuran baris dari Matriks: "); m.row = sc.nextInt();
-				System.out.print("Masukkan ukuran kolom dari Matriks: "); m.col = sc.nextInt();
+				System.out.print("Masukkan ukuran baris dari Matriks: ");	int row = sc.nextInt();
+				System.out.print("Masukkan ukuran kolom dari Matriks: "); int col = sc.nextInt();
+				m = new Matrix(row, col);
+
 				System.out.println("Masukkan Matriks berukuran baris x kolom sesuai input sebelumnya");
 				m.readMatrix(sc);
 
@@ -193,8 +195,7 @@ public class Main {
 	public static int cinCheck(Scanner sc, int a, int b){ // ini buat input yang ada constrain nya
 		int input = sc.nextInt(); 
 		while((input<a)||(input>b)){
-			System.out.println("Input tidak valid, silahkan ulangi prosesi input kembali di bawah ini."); 
-			input = sc.nextInt();
+			System.out.print("Input tidak valid, silahkan input kembali: "); input = sc.nextInt();
 		} return input;
 	}
 }
