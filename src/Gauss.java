@@ -34,7 +34,7 @@ public class Gauss {
 
     public static void main(String[] args){
         Matrix m = new Matrix(4, 5);
-        m.readMatrix();
+        // m.readMatrix();
         m.displayMatrix();
         System.out.println("");
         Gauss.f(m);

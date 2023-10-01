@@ -27,13 +27,17 @@ public class TXTReaderWriter {
             } sizeScanner.close();
 
             // try untuk mencoba membaca string dari txt dan mengubahnya ke elemen2 matriks
-            A.row = rowSize; Scanner reader = new Scanner(txt);
+            int Arow = rowSize, Acol = 0; Scanner reader = new Scanner(txt);
             try {
                 for (int i = 0; i < rowSize; i++){
                     String line = reader.nextLine();
                     String[] row = line.split(" ");
-                    A.col = row.length;
-                    for (int j = 0; j < A.col; j++) A.set(i, j, Float.parseFloat(row[j]));
+                    Acol = row.length;
+                } A = new Matrix(Arow, Acol);
+                for (int i = 0; i < rowSize; i++){
+                    String line = reader.nextLine();
+                    String[] row = line.split(" ");
+                    for (int j = 0; j < Acol; j++) A.set(i, j, Float.parseFloat(row[j]));
                 }
             } finally {
                 // janlup close
