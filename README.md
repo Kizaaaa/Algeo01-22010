@@ -1,7 +1,7 @@
 # Repo TuBes Algeo K01 IF 2022/2023
 
 <p align="center">
-  <img height="160px" src="https://media.discordapp.net/attachments/1138429958486769706/1152174025112555610/IMG_20230915_162608.jpg?ex=65193bad&is=6517ea2d&hm=dd1b409d823bc8e47baf1c368dee9a4678076373d2abc48c61aaf702895af6da&=&width=935&height=701" alt="logo HMIF"/>
+  <img height="360px" src="https://media.discordapp.net/attachments/1138429958486769706/1152174025112555610/IMG_20230915_162608.jpg?ex=65193bad&is=6517ea2d&hm=dd1b409d823bc8e47baf1c368dee9a4678076373d2abc48c61aaf702895af6da&=&width=935&height=701" alt="logo HMIF"/>
   <br>
   <a><i><sup>Personil kelompok "Daspro Gagal A"</sup></i></a>
 </p>
