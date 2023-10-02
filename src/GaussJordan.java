@@ -104,7 +104,7 @@ public class GaussJordan {
                 output = output.concat(Float.toString(y[i]));
                 output = output.concat("\n");
             }
-            TXTReaderWriter.writeTXT(output);
+            TXTReaderWriter.writeTXT(sc, output);
         }
 
         return y;
