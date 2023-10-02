@@ -2,7 +2,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Scanner;
 
-public class Gauss {
+public class GaussJordan {
     public static float[] f(Matrix m, Scanner sc){
         if(m.row < m.col-1){
             System.out.println("Tidak dapat mencari solusi SPL.");
@@ -26,14 +26,17 @@ public class Gauss {
                 }
                 if(m.elmt(i, i) != 0){
                     m.timeRow(i, 1/m.elmt(i, i));
+                    for(int j=0;j<i;j++){
+                        m.addRow(j, i, -1*(m.elmt(j, i)/m.elmt(i, i)));
+                    }
                     for(int j=i+1;j<m.row;j++){
                         m.addRow(j, i, -1*(m.elmt(j, i)/m.elmt(i, i)));
                     }
                 }
-
+                
                 for(int k=0;k<m.row;k++){
                     for(int l=0;l<m.col-1;l++){
-                        Gauss.round(m.elmt(k, l), 2);
+                        GaussJordan.round(m.elmt(k, l), 2);
                     }
                 }
             }
@@ -116,18 +119,16 @@ public class Gauss {
     }
 
     public static void main(String[] args){
-        Matrix m = new Matrix(5, 5);
+        Matrix m = new Matrix(3, 3);
         Scanner sc = new Scanner(System.in);
         m.readMatrix(sc);
         System.out.println("");
-        float[] x;
-        x = Gauss.f(m, sc);
+        GaussJordan.f(m, sc);
+        m.displayMatrix();
     }
 }
 /*
-3 1 2 2 19
-2 1 1 3 19
-2 1 4 -1 12
-1 2 1 1 12
-1 2 1 1 12
+1 1 1 0
+2 3 1 1
+3 1 2 1
  */
