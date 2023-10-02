@@ -35,6 +35,9 @@ public class Matrix {
     public void displayMatrix(){
         for(int i=0;i<this.row;i++){
             for(int j=0;j<this.col;j++){
+                if(elmt(i, j) == -0){
+                    set(i, j, 0);
+                }
                 if(j == 0){
                     System.out.print(elmt(i, j));
                 } else {
@@ -51,6 +54,14 @@ public class Matrix {
         float temp[] = this.element[row1];
         this.element[row1] = this.element[row2];
         this.element[row2] = temp;
+    }
+
+    public void swapCol(int row1, int row2){
+        for(int i=0;i<this.row;i++){
+            float temp = this.elmt(i, row1);
+            this.set(i, row1, this.elmt(i, row2));
+            this.set(i, row2, temp);
+        }
     }
 
     /* Kali baris dengan konstanta */
