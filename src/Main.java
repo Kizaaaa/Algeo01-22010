@@ -80,9 +80,10 @@ public class Main {
 	}
 
 	public static void detHome(Scanner sc){ // buat determinan gan
-     	System.out.println("Menu Determinan telah dipilih");
+		System.out.println("Menu Determinan telah dipilih");
 
 		Matrix m = InputMatrix(sc);
+		TXTReaderWriter.writeTXT(sc, TXTReaderWriter.castMatrixString(m));
 		// di sini panggil determinan,
 	}
 
