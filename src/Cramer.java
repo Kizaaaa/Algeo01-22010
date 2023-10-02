@@ -35,7 +35,7 @@ public class Cramer {
                 output = output.concat(Float.toString(x[i]));
                 output = output.concat("\n");
             }
-            TXTReaderWriter.writeTXT(output);
+            TXTReaderWriter.writeTXT(sc, output);
         }
     }
 
