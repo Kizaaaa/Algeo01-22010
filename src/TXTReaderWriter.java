@@ -34,7 +34,6 @@ public class TXTReaderWriter {
                 } A = new Matrix(Arow, Acol);
                 for (int i = 0; i < rowSize; i++){
                     String line = reader.nextLine();
-                    System.out.println("seiko");
                     String[] row = line.split(" ");
                     for (int j = 0; j < Acol; j++) A.set(i, j, Float.parseFloat(row[j]));
                 }
@@ -62,7 +61,7 @@ public class TXTReaderWriter {
         // mencoba untuk write
         try {
             File current = new File("..");
-            File txt = new File(current, "test\\"+namaFile);
+            File txt = new File("test\\"+namaFile);
             FileWriter txtWrite = new FileWriter(txt, true);
             txtWrite.write(str);
             txtWrite.close();
