@@ -49,18 +49,16 @@ public class TXTReaderWriter {
         return A;
     }
 
-    public static void writeTXT(String str){
-        Scanner s = new Scanner(System.in);
+    public static void writeTXT(Scanner sc, String str){
 
         // input nama file yang akan diwrite/dibuat
         String namaFile = ""; 
         while(namaFile == ""){
-            System.out.print("Masukkan nama file ouput (akan diwrite {nama}.txt): "); namaFile = s.nextLine();
+            System.out.print("Masukkan nama file ouput (akan diwrite {nama}.txt): "); namaFile = sc.nextLine();
         } System.out.println("nama file yang dipilih: " + namaFile);
 
         // mencoba untuk write
         try {
-            File current = new File("..");
             File txt = new File("test\\"+namaFile);
             FileWriter txtWrite = new FileWriter(txt, true);
             txtWrite.write(str);
@@ -70,7 +68,6 @@ public class TXTReaderWriter {
             System.out.println("error gan waktu parsing, error message: " + err);       
         }
 
-        s.close();
     }
 
     public static String castMatrixString(Matrix m){
