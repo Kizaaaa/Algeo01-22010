@@ -27,11 +27,10 @@ public class TXTReaderWriter {
             // try untuk mencoba membaca string dari txt dan mengubahnya ke elemen2 matriks
             int Arow = rowSize, Acol = 0; Scanner reader = new Scanner(txt); Scanner reader2 = new Scanner(txt);
             try {
-                for (int i = 0; i < rowSize; i++){
-                    String line = reader2.nextLine();
-                    String[] row = line.split(" ");
-                    Acol = row.length;
-                } A = new Matrix(Arow, Acol);
+                String line2 = reader2.nextLine();
+                String[] row2 = line2.split(" ");
+                Acol = row2.length;
+                A = new Matrix(Arow, Acol);
                 for (int i = 0; i < rowSize; i++){
                     String line = reader.nextLine();
                     String[] row = line.split(" ");
@@ -54,7 +53,7 @@ public class TXTReaderWriter {
         // input nama file yang akan diwrite/dibuat
         String namaFile = ""; 
         while(namaFile == ""){
-            System.out.print("Masukkan nama file ouput (akan diwrite {nama}.txt): "); namaFile = sc.nextLine();
+            System.out.print("Masukkan nama file ouput (akan diwrite {nama}.txt): "); namaFile = sc.next();
         } System.out.println("nama file yang dipilih: " + namaFile);
 
         // mencoba untuk write
