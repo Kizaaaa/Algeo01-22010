@@ -6,6 +6,8 @@ public class Inverse {
         failRet = new Matrix(1, 2); failRet.set(0, 0, 6); failRet.set(0, 1, 9);
         mtemp = new Matrix(m.row, 2*m.col);
         mtemp2 = new Matrix(m.row, m.col);
+
+        // Menambahkan matrix identitas di samping kanan matrix
         for(int i=0;i<m.row;i++){
             for(int j=0;j<m.col;j++){
                 mtemp.set(i, j, m.elmt(i, j));
@@ -16,7 +18,8 @@ public class Inverse {
                 }
             }
         }
-        
+
+        // Gauss Jordan
         for(int i=0;i<m.row;i++){
             if(mtemp.elmt(i, i) != 1){
                 for(int j=i+1;j<m.row;j++){
@@ -51,6 +54,7 @@ public class Inverse {
             }
         }
 
+        // return
         if(isIdentity(mtemp)){
             for(int i=0;i<m.row;i++){
                 for(int j=0;j<m.col;j++){
@@ -92,19 +96,59 @@ public class Inverse {
         return true;
     }
 
+    public static Matrix inverseKof(Matrix m, Scanner sc){
+        Matrix mtemp,failRet;
+        failRet = new Matrix(1, 2); failRet.set(0, 0, 6); failRet.set(0, 1, 9);
+        mtemp = new Matrix(m.row, m.col);
+
+        for(int i=0;i<m.row;i++){
+            for(int j=0;j<m.col;j++){
+                if((i+j) % 2 == 1){
+                    mtemp.set(i, j, -1 * Determinan.detCof(Determinan.shrinkMatrix(m, i, j)));
+                } else {
+                    mtemp.set(i, j, Determinan.detCof(Determinan.shrinkMatrix(m, i, j)));
+                }
+            }
+        }
+
+        mtemp = Matrix.transposeMatrix(mtemp);
+        float det = Determinan.detCof(m);
+        if(det == 0){
+            System.out.println("Matriks tersebut tidak punya inverse!");
+            return failRet;
+        } else {
+            for(int i=0;i<mtemp.row;i++){
+                mtemp.timeRow(i, 1/det);
+            }
+            
+            System.out.println("Hasil perhitungan menggunakan metode Kofaktor :");
+            mtemp.displayMatrix();
+
+            System.out.print("Tulis hasil dalam file .txt? (y/n): ");
+            String txt = sc.next();
+            while(!txt.equals("y") && !txt.equals("Y") && !txt.equals("n") && !txt.equals("N")){
+                System.out.print("Input tidak valid, silahkan input kembali: ");
+                txt = sc.next();
+            }
+            if(txt.equals("y") || txt.equals("Y")){
+                TXTReaderWriter.writeTXT(sc, TXTReaderWriter.castMatrixString(mtemp));
+            }
+
+            return mtemp;
+        }
+    }
+
     public static void main(String[] args){
-        Matrix m = new Matrix(2, 2);
+        Matrix m = new Matrix(3, 3);
         Scanner sc = new Scanner(System.in);
         m.readMatrix(sc);
         System.out.println("");
-        m = Inverse.inverseObe(m, sc);
+        m = Inverse.inverseKof(m, sc);
         m.displayMatrix();
     }
 }
 /*
-3 1 2 2 19
-2 1 1 3 19
-2 1 4 -1 12
-1 2 1 1 12
-1 2 1 1 12
+3 -2 4
+1 0 2
+0 1 0
  */

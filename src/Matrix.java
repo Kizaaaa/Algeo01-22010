@@ -77,4 +77,31 @@ public class Matrix {
             this.element[row1][i] += this.element[row2][i]*k;
         }
     }
+
+    /* Transpose Matrix */
+    public static Matrix transposeMatrix(Matrix m){
+        Matrix mtemp = new Matrix(m.col, m.row);
+        for(int i=0;i<mtemp.row;i++){
+            for(int j=0;j<mtemp.col;j++){
+                mtemp.set(i, j, m.elmt(j, i));
+            }
+        }
+        return mtemp;
+    }
+
+    /* Perkalian Matrix */
+    public static Matrix perkalianMatrix(Matrix m1, Matrix m2){
+        Matrix m3 = new Matrix(m1.row, m2.col);
+        for(int i=0;i<m1.row;i++){
+            for(int j=0;j<m2.col;j++){
+                int val = 0;
+                for(int k=0;k<m1.col;k++){
+                    val += (m1.elmt(i, k) * m2.elmt(k, j));
+                }
+                m3.set(i, j, val);
+            }
+        }
+
+        return m3;
+    }
 }
