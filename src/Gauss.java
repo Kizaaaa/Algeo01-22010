@@ -1,6 +1,7 @@
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Scanner;
+@SuppressWarnings("unused")
 
 public class Gauss {
     public static float[] f(Matrix m, Scanner sc){
@@ -35,7 +36,7 @@ public class Gauss {
 
                 for(int k=0;k<m.row;k++){
                     for(int l=0;l<m.col-1;l++){
-                        Gauss.round(m.elmt(k, l), 4);
+                        Gauss.round(m.elmt(k, l), 2);
                     }
                 }
             }
@@ -67,12 +68,10 @@ public class Gauss {
             x = new float[barisnonzero];
             y = new float[barisnonzero];
 
-            if(barisanomali){ // Tidak ada solusi
+            if(barisanomali || barisnonzero < m.col - 1){
                 System.out.println("Tidak dapat mencari solusi SPL.");
                 return failRet;
-            } else if(barisnonzero < m.col - 1){ // Solusi parametrik
-                return y;
-            } else { // Solusi tunggal
+            } else {
                 x[0] = m.elmt(barisnonzero-1, m.col-1);
                 for(int i=1;i<barisnonzero;i++){
                     x[i] = m.elmt(barisnonzero-1-i, m.col-1);
@@ -108,7 +107,7 @@ public class Gauss {
                     }
                     TXTReaderWriter.writeTXT(sc, output);
                 }
-                
+
                 return y;
             }
         }
@@ -127,6 +126,8 @@ public class Gauss {
         Scanner sc = new Scanner(System.in);
         m.readMatrix(sc);
         System.out.println("");
+        float[] x;
+        x = Gauss.f(m, sc);
     }
 }
 /*
