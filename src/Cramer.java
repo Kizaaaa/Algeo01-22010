@@ -1,5 +1,4 @@
 import java.util.Scanner;
-@SuppressWarnings("unused")
 
 public class Cramer {
     public static void f(Matrix m, Scanner sc){
@@ -35,7 +34,7 @@ public class Cramer {
                 output = output.concat(Float.toString(x[i]));
                 output = output.concat("\n");
             }
-            TXTReaderWriter.writeTXT(output);
+            TXTReaderWriter.writeTXT(sc, output);
         }
     }
 
