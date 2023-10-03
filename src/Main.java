@@ -108,17 +108,25 @@ public class Main {
 	}
 
 	public static void linearRegHome(Scanner sc){ // buat regresi linear gan
-		System.out.println("Menu Regresi Linear Berganda telah dipilih");
+		System.out.println("Menu Regresi Linear Berganda telah dipilih\n");
 
-		// input jumlah pengujian dan jumlah titik x yang akan diuji
-		System.out.print("Jumlah pengujian: "); int row = sc.nextInt();
-		System.out.print("Masukkan jumlah titik yang diuji: "); int col = sc.nextInt()+1;
-		System.out.println("Masukkan Matriksnya di bawah ini");
-		Matrix m = new Matrix(row, col); m.readMatrix(sc);
-
+		System.out.println("Silahkan pilih metode input (1 dari keyboard, 2 dari file .txt): "); int input = cinCheck(sc, 1, 2);
+		
+		Matrix m = new Matrix(0, 0);
+		switch (input) {
+			case 1:
+				// input jumlah pengujian dan jumlah titik x yang akan diuji
+				System.out.print("Jumlah pengujian: "); int row = sc.nextInt();
+				System.out.print("Masukkan jumlah titik yang diuji: "); int col = sc.nextInt()+1;
+				System.out.println("Masukkan Matriksnya di bawah ini");
+				m = new Matrix(row, col); m.readMatrix(sc);				
+				break;
+			case 2:
+				m = TXTReaderWriter.readTXT(sc);
+				break;
+		}
 		// oper matrix ke fungsi
 		LinearReg.f(sc, m);
-
 	}
 
 
