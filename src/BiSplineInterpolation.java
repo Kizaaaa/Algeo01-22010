@@ -37,26 +37,42 @@ public class BiSplineInterpolation {
         return X;
     }
 
-    public static Matrix readF(Scanner sc, float a, float b){
-        Matrix readMat=TXTReaderWriter.readTXT(sc);
-        Matrix retMat = new Matrix (readMat.row-1,readMat.col);
-        for (int i=0;i<retMat.row;i++){
-            for (int j=0;j<retMat.col;j++){
-                retMat.set(i,j,readMat.elmt(i,j));
+    public static Matrix readF(Scanner sc, Matrix m){
+        int i,j,k=0;
+        Matrix retMat = new Matrix (16,1);
+        for (i=0;i<m.row-1;i++){
+            for (j=0;j<m.col;j++){
+                retMat.set(k,0,m.elmt(i,j));
+                k+=1;
             }
         }
-        a=readMat.elmt(retMat.col, 0);
-        b=readMat.elmt(retMat.col, 1);
         return retMat;
     }
 
+    public static float countResult(Matrix m,float a,float b){
+        int i,j,k=0;
+        float r=0;
+        for (j=0;j<=3;j++){
+            for (i=0;i<=3;i++){
+                r+=m.elmt(k,0)*Math.pow(a, i)*Math.pow(b, j);
+                k+=1;
+            }
+        }
+        return r;
+    }
+
     public static void main(Scanner sc){
-        int a=0,b=0;
-        //Matrix fVals=readF(sc, a, b);
+        float a,b;
+        Matrix readMat=TXTReaderWriter.readTXT(sc);        
+        Matrix fVals=readF(sc, readMat);
+        a=readMat.elmt(readMat.col, 0);
+        b=readMat.elmt(readMat.col, 1);
         Matrix X=xMatrix();
-        Matrix fVals=TXTReaderWriter.readTXT(sc);
-        X.displayMatrix();
-        fVals.displayMatrix();
-        System.out.println("\na:" + a + " b:" + b);
+        Matrix inverseX=Inverse.inverseObeNoText(X,sc);
+        inverseX.displayMatrix();
+        Matrix aVals=Matrix.perkalianMatrix(inverseX, fVals);
+        aVals.displayMatrix();
+        float result = countResult(aVals, a, b);
+        System.out.println("f("+a+","+b+")="+result);
     }
 }

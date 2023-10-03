@@ -2,8 +2,17 @@ import java.util.Scanner;
 import java.lang.Math;
 
 public class PolynomialInterpolation{
-    public static void interpolation(Matrix m, float x){
-        //pake gauss
+    public static void interpolation(Matrix m, float x, Scanner sc){
+        //nanti bikin gauss no text version, sekarang flora turu dahulu
+        float result = 0;
+        float[] aVals=Gauss.f(m, sc);
+        System.out.print("f(x)=");
+        for (int i=aVals.length-1;i>=0;i--){
+            System.out.print(aVals[i]+"x^"+i+" + ");
+            result+=aVals[i]*Math.pow(x,i);
+        }
+        System.out.print(", f("+x+")=");
+        System.out.print(result+"\n");
     }
 
     public static Matrix keyInput(Scanner sc){
@@ -53,9 +62,9 @@ public class PolynomialInterpolation{
         }
         else{
             interpolationMatrix=fileInput(taksiran,sc);}
-        
-        interpolation(interpolationMatrix,taksiran);
-
+        interpolationMatrix.displayMatrix();
+        System.out.println("\ntaksiran:" + taksiran);
+        interpolation(interpolationMatrix,taksiran,sc);
     }
 
 }

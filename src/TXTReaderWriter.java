@@ -34,7 +34,7 @@ public class TXTReaderWriter {
                 for (int i = 0; i < rowSize; i++){
                     String line = reader.nextLine();
                     String[] row = line.split(" ");
-                    for (int j = 0; j < Acol; j++) A.set(i, j, Float.parseFloat(row[j]));
+                    for (int j = 0; j < row.length; j++) A.set(i, j, Float.parseFloat(row[j]));
                 }
             } finally {
                 // janlup close
