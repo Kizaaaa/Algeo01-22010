@@ -1,9 +1,8 @@
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Scanner;
 
 public class GaussJordan {
     public static float[] f(Matrix m, Scanner sc){
+        float[] failRet = {6, 9};
         if(m.row < m.col-1){
             System.out.println("Tidak dapat mencari solusi SPL.");
         } else { /* ubah matriks jadi matriks eselon */
@@ -36,7 +35,7 @@ public class GaussJordan {
                 
                 for(int k=0;k<m.row;k++){
                     for(int l=0;l<m.col-1;l++){
-                        GaussJordan.round(m.elmt(k, l), 2);
+                        Gauss.round(m.elmt(k, l), 4);
                     }
                 }
             }
@@ -70,7 +69,10 @@ public class GaussJordan {
 
         if(barisanomali || barisnonzero < m.col - 1){
             System.out.println("Tidak dapat mencari solusi SPL.");
-        } else {
+            return failRet;
+        } else if(barisnonzero < m.col - 1){ // Solusi parametrik
+            return y;
+        } else { // Solusi tunggal
             x[0] = m.elmt(barisnonzero-1, m.col-1);
             for(int i=1;i<barisnonzero;i++){
                 x[i] = m.elmt(barisnonzero-1-i, m.col-1);
@@ -108,14 +110,6 @@ public class GaussJordan {
         }
 
         return y;
-    }
-
-    private static double round(double value, int places) {
-        if (places < 0) throw new IllegalArgumentException();
-
-        BigDecimal bd = new BigDecimal(Double.toString(value));
-        bd = bd.setScale(places, RoundingMode.HALF_UP);
-        return bd.doubleValue();
     }
 
     public static void main(String[] args){
