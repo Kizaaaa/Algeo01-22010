@@ -1,5 +1,4 @@
 import java.util.Scanner;
-@SuppressWarnings("unused")
 
 public class Cramer {
     public static void f(Matrix m, Scanner sc){
