@@ -35,7 +35,7 @@ public class Gauss {
 
                 for(int k=0;k<m.row;k++){
                     for(int l=0;l<m.col-1;l++){
-                        Gauss.round(m.elmt(k, l), 2);
+                        Gauss.round(m.elmt(k, l), 4);
                     }
                 }
             }
@@ -67,10 +67,12 @@ public class Gauss {
             x = new float[barisnonzero];
             y = new float[barisnonzero];
 
-            if(barisanomali || barisnonzero < m.col - 1){
+            if(barisanomali){ // Tidak ada solusi
                 System.out.println("Tidak dapat mencari solusi SPL.");
                 return failRet;
-            } else {
+            } else if(barisnonzero < m.col - 1){ // Solusi parametrik
+                return y;
+            } else { // Solusi tunggal
                 x[0] = m.elmt(barisnonzero-1, m.col-1);
                 for(int i=1;i<barisnonzero;i++){
                     x[i] = m.elmt(barisnonzero-1-i, m.col-1);
@@ -125,8 +127,6 @@ public class Gauss {
         Scanner sc = new Scanner(System.in);
         m.readMatrix(sc);
         System.out.println("");
-        float[] x;
-        x = Gauss.f(m, sc);
     }
 }
 /*

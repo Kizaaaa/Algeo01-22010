@@ -97,8 +97,6 @@ public class Main {
 
 	public static void interpolasiPolinomHome(Scanner sc){ // buat interpolasi polinom gan
 		System.out.println("Menu Interpolasi Polinom telah dipilih");
-
-		Interpolasi.main(sc);
 		// di sini panggil fungsi interpolasi polinom
 	}
 
