@@ -62,6 +62,19 @@ public class Inverse {
             return failRet;
         }
 
+        System.out.println("Hasil perhitungan menggunakan metode OBE :");
+        mtemp2.displayMatrix();
+
+        System.out.print("Tulis hasil dalam file .txt? (y/n): ");
+        String txt = sc.next();
+        while(!txt.equals("y") && !txt.equals("Y") && !txt.equals("n") && !txt.equals("N")){
+            System.out.print("Input tidak valid, silahkan input kembali: ");
+            txt = sc.next();
+        }
+        if(txt.equals("y") || txt.equals("Y")){
+            TXTReaderWriter.writeTXT(sc, TXTReaderWriter.castMatrixString(mtemp2));
+        }
+
         return mtemp2;
     }
 
