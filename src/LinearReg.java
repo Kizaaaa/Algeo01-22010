@@ -20,21 +20,23 @@ public class LinearReg {
 
                     if ((i == 0) && (j == 0)) sum += linreg.row; // elemen ujung kiri atas (nb0)
                     else if (i == 0){
-                        for (int k = 0; k < m.row; k++) sum += m.elmt(k, (j % m.col)); // elemen ujung atas
+                        for (int k = 0; k < m.row; k++){
+                            sum += m.elmt(k, ((j-1) % m.col)); // elemen ujung atas
+                        }
                     } else if (j == 0){
-                        for (int k = 0; k < m.row; k++) sum += m.elmt(k, (i % m.col)); // elemen ujung kiri
+                        for (int k = 0; k < m.row; k++) sum += m.elmt(k, ((i-1) % m.col)); // elemen ujung kiri
                     } else {
-                        for (int k = 0; k < m.row; k++) sum += (m.elmt(k, (i % m.col))*m.elmt(k, (j % m.col))); // selain.
+                        for (int k = 0; k < m.row; k++) sum += (m.elmt(k, ((i-1) % m.col))*m.elmt(k, ((j-1) % m.col))); // selain.
                     } 
                     
                     // taruh ke matrix linreg
-                    linreg.set(i, j, sum);
+                    linreg.set(i, j, (float)Gauss.round(sum, 2));
                 }
             } 
 
             // print matrix linreg
             System.out.println("Dari matriks yang diinput, terbentuk matrix regresi linear: ");
-            System.out.print(TXTReaderWriter.castMatrixString(linreg));
+            System.out.println(TXTReaderWriter.castMatrixString(linreg));
 
             //solving pake gauss
             if(linreg.row < linreg.col-1){
@@ -113,28 +115,39 @@ public class LinearReg {
                         y[i] = x[barisnonzero-i-1];
                     }
                 
-    
-                    System.out.println("Hasil perhitungan menggunakan metode Gauss :");
+                    String strout = "Didapat persamaan regresi linear: "; strout = strout.concat("f(x) = ");
                     for(int i=0;i<barisnonzero;i++){
-                        System.out.println("x" + (i+1) + " : " + y[i]);
-                    }
-    
+                        if (i == 0) strout = strout.concat(Float.toString(y[i]));
+                        else if (y[i] < 0) strout = strout.concat(Float.toString(y[i])+"x"+Integer.toString(i));
+                        else strout = strout.concat("+" + Float.toString(y[i]) + "x"+ Integer.toString(i));
+                    } String strout2 = strout;
+                    System.out.println(strout2);
+                    
+
+                    System.out.print("Apakah anda ingin menginput nilai guna dihitung? (y/n): "); String txt = sc.next();
+                    while(!txt.equals("y") && !txt.equals("Y") && !txt.equals("n") && !txt.equals("N")){
+                        System.out.print("Input tidak valid, silahkan input kembali: ");
+                        txt = sc.next();
+                    } if (txt.equals("y") || txt.equals("Y")){
+                        float sum = 0, arg; sum += y[0];
+                        strout = strout.concat("\nf(");
+                        for (int i=0;i<barisnonzero-1;i++){
+                            System.out.print("Masukkan x"+(i+1)+": "); arg = sc.nextFloat();
+                            sum += y[i+1]*arg; 
+                            if (i == 0) strout = strout.concat(Float.toString(arg));
+                            else strout = strout.concat("," + arg);
+                        } strout = strout.concat(") = " + sum);
+                        System.out.println("Hasil yang didapat adalah = " + sum);
+                    }                  
+
                     System.out.print("Tulis hasil dalam file .txt? (y/n): ");
-                    String txt = sc.next();
+                    txt = sc.next();
                     while(!txt.equals("y") && !txt.equals("Y") && !txt.equals("n") && !txt.equals("N")){
                         System.out.print("Input tidak valid, silahkan input kembali: ");
                         txt = sc.next();
                     }
                     if(txt.equals("y") || txt.equals("Y")){
-                        String output = "";
-                        for(int i=0;i<barisnonzero;i++){
-                            output = output.concat("x");
-                            output = output.concat(Integer.toString(i+1));
-                            output = output.concat(" : ");
-                            output = output.concat(Float.toString(y[i]));
-                            output = output.concat("\n");
-                        }
-                        TXTReaderWriter.writeTXT(sc, output);
+                        TXTReaderWriter.writeTXT(sc, strout);
                     }
                 }
             }
