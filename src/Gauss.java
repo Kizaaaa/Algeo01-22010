@@ -1,7 +1,6 @@
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Scanner;
-@SuppressWarnings("unused")
 
 public class Gauss {
     public static float[] f(Matrix m, Scanner sc){
@@ -120,20 +119,4 @@ public class Gauss {
         bd = bd.setScale(places, RoundingMode.HALF_UP);
         return bd.doubleValue();
     }
-
-    public static void main(String[] args){
-        Matrix m = new Matrix(5, 5);
-        Scanner sc = new Scanner(System.in);
-        m.readMatrix(sc);
-        System.out.println("");
-        float[] x;
-        x = Gauss.f(m, sc);
-    }
 }
-/*
-3 1 2 2 19
-2 1 1 3 19
-2 1 4 -1 12
-1 2 1 1 12
-1 2 1 1 12
- */
