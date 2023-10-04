@@ -69,10 +69,18 @@ public class BiSplineInterpolation {
         b=readMat.elmt(readMat.col, 1);
         Matrix X=xMatrix();
         Matrix inverseX=Inverse.inverseObeNoText(X,sc);
-        inverseX.displayMatrix();
         Matrix aVals=Matrix.perkalianMatrix(inverseX, fVals);
-        aVals.displayMatrix();
         float result = countResult(aVals, a, b);
-        System.out.println("f("+a+","+b+")="+result);
+        String outString = "f(" + Float.toString(a) + "," + Float.toString(b) + ") = " + Float.toString(result);
+        System.out.println(outString);
+        System.out.print("Tulis hasil dalam file .txt? (y/n): ");
+        String txt = sc.next();
+        while(!txt.equals("y") && !txt.equals("Y") && !txt.equals("n") && !txt.equals("N")){
+            System.out.print("Input tidak valid, silahkan input kembali: ");
+            txt = sc.next();
+        }
+        if(txt.equals("y") || txt.equals("Y")){
+            TXTReaderWriter.writeTXT(sc, outString);
+        }
     }
 }
