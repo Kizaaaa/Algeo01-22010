@@ -1,11 +1,7 @@
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Scanner;
-@SuppressWarnings("unused")
 
 public class LinearReg {
     public static void f(Scanner sc, Matrix m){
-        int a = 0;
         if ((m.row == 0) || (m.col == 0)) System.out.println("Perhitungan gagal, matriks yang diberikan merupakan matriks kosong.");
         else if (m.col == 1) System.out.println("Perhitungan gagal, matriks yang diberikan bukan berupa persamaan."); 
         else{
@@ -18,7 +14,7 @@ public class LinearReg {
                     // declarasi sum
                     float sum = 0;
 
-                    if ((i == 0) && (j == 0)) sum += linreg.row; // elemen ujung kiri atas (nb0)
+                    if ((i == 0) && (j == 0)) sum += m.row; // elemen ujung kiri atas (nb0)
                     else if (i == 0){
                         for (int k = 0; k < m.row; k++){
                             sum += m.elmt(k, ((j-1) % m.col)); // elemen ujung atas
@@ -35,8 +31,14 @@ public class LinearReg {
             } 
 
             // print matrix linreg
-            System.out.println("Dari matriks yang diinput, terbentuk matrix regresi linear: ");
-            System.out.println(TXTReaderWriter.castMatrixString(linreg));
+            System.out.println("Dari matriks yang diinput, terbentuk SPL regresi linear: ");
+            for (int i = 0; i < linreg.row; i++){
+                for (int j = 0; j < linreg.col; j++){
+                    if (j == linreg.col-1) System.out.println("= " + linreg.elmt(i, j));
+                    else if (j == linreg.col-2) System.out.print(linreg.elmt(i, j) + "b" + j + " ");
+                    else System.out.print(linreg.elmt(i, j) + "b" + j + " + ");
+                }
+            } System.out.println("");
 
             //solving pake gauss
             if(linreg.row < linreg.col-1){
@@ -117,11 +119,12 @@ public class LinearReg {
                 
                     String strout = "Didapat persamaan regresi linear: "; strout = strout.concat("f(x) = ");
                     for(int i=0;i<barisnonzero;i++){
-                        if (i == 0) strout = strout.concat(Float.toString(y[i]));
-                        else if (y[i] < 0) strout = strout.concat(Float.toString(y[i])+"x"+Integer.toString(i));
-                        else strout = strout.concat("+" + Float.toString(y[i]) + "x"+ Integer.toString(i));
+                        if (y[i] != 0){
+                            if (i == 0) strout = strout.concat(Float.toString(y[i]) + " ");
+                            else strout = strout.concat("+ (" + Float.toString(y[i]) + ")x"+ Integer.toString(i)) + " ";
+                        }
                     } String strout2 = strout;
-                    System.out.println(strout2);
+                    System.out.println(strout2 + "\n");
                     
 
                     System.out.print("Apakah anda ingin menginput nilai guna dihitung? (y/n): "); String txt = sc.next();

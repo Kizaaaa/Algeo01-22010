@@ -111,18 +111,4 @@ public class GaussJordan {
 
         return y;
     }
-
-    public static void main(String[] args){
-        Matrix m = new Matrix(3, 3);
-        Scanner sc = new Scanner(System.in);
-        m.readMatrix(sc);
-        System.out.println("");
-        GaussJordan.f(m, sc);
-        m.displayMatrix();
-    }
 }
-/*
-1 1 1 0
-2 3 1 1
-3 1 2 1
- */

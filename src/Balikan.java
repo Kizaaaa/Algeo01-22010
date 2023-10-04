@@ -50,17 +50,4 @@ public class Balikan {
             }
         }
     }
-
-    public static void main(String[] args){
-        Matrix m = new Matrix(3, 4);
-        Scanner sc = new Scanner(System.in);
-        m.readMatrix(sc);
-        System.out.println("");
-        Balikan.f(m, sc);
-    }
 }
-/*
-1 2 3 5
-2 5 3 3
-1 0 8 1
- */

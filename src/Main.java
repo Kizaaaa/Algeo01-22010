@@ -40,7 +40,7 @@ public class Main {
     }
 
 	public static int home(Scanner sc){ // ini home menu nya
-		System.out.print("MENU : \n1. Sistem Persamaan Linier\n2. Determinan\n3. Matriks Balikan\n4. Interpolasi Polinom\n5. Interpolasi Bicubic Spine\n6. Regresi Linier Berganda\n7. Keluar\nMasukkan pilihan(1-7):");
+		System.out.print("MENU : \n1. Sistem Persamaan Linier\n2. Determinan\n3. Matriks Balikan\n4. Interpolasi Polinom\n5. Interpolasi Bicubic Spine\n6. Regresi Linier Berganda\n7. Keluar\nMasukkan pilihan(1-7): ");
 
 		int input = cinCheck(sc, 1, 7);
 		return input; // di sini udah sukses inputnya (valid)
@@ -111,8 +111,8 @@ public class Main {
 
 	public static void linearRegHome(Scanner sc){ // buat regresi linear gan
 		System.out.println("Menu Regresi Linear Berganda telah dipilih\n");
-
-		System.out.println("Silahkan pilih metode input (1 dari keyboard, 2 dari file .txt): "); int input = cinCheck(sc, 1, 2);
+		System.out.print("Silahkan pilih metode input (1 dari keyboard, 2 dari file .txt): "); int input = cinCheck(sc, 1, 2);
+		System.out.println("");
 		
 		Matrix m = new Matrix(0, 0);
 		switch (input) {
@@ -124,7 +124,7 @@ public class Main {
 				m = new Matrix(row, col); m.readMatrix(sc);				
 				break;
 			case 2:
-				m = TXTReaderWriter.readTXT(sc);
+				m = TXTReaderWriter.readTXT(sc); System.out.println("");
 				break;
 		}
 		// oper matrix ke fungsi

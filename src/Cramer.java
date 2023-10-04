@@ -52,18 +52,4 @@ public class Cramer {
         // janlup direturn
         return m2;
     }
-
-    public static void main(String[] args){
-        Matrix m = new Matrix(4, 5);
-        Scanner sc = new Scanner(System.in);
-        m.readMatrix(sc);
-        System.out.println("");
-        Cramer.f(m, sc);
-    }
 }
-/*
-3 1 2 2 19
-2 1 1 3 19
-2 1 4 -1 12
-1 2 1 1 12
- */
