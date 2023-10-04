@@ -200,22 +200,4 @@ public class Inverse {
 
         return mtemp2;
     }
-
-    public static void main(String[] args){
-        Matrix m = new Matrix(3, 3);
-        Scanner sc = new Scanner(System.in);
-        m.readMatrix(sc);
-        System.out.println("");
-        m = Inverse.inverseObe(m, sc);
-        m.displayMatrix();
-    }
 }
-/*
-3 -2 4
-1 0 2
-0 1 0
-
-1 2 3
-2 5 3
-1 0 8
- */
