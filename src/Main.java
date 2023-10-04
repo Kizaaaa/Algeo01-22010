@@ -111,7 +111,6 @@ public class Main {
 
 	public static void linearRegHome(Scanner sc){ // buat regresi linear gan
 		System.out.println("Menu Regresi Linear Berganda telah dipilih\n");
-
 		System.out.print("Silahkan pilih metode input (1 dari keyboard, 2 dari file .txt): "); int input = cinCheck(sc, 1, 2);
 		System.out.println("");
 		
