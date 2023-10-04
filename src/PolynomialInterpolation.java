@@ -5,26 +5,14 @@ public class PolynomialInterpolation{
     public static void interpolation(Matrix m, float x, Scanner sc){
         float result = 0;
         float[] aVals=Gauss.gaussNoText(m, sc);
-        float[] failRet={6,9}; //dari Gauss
-        if (aVals==failRet){
-            System.out.println("Maaf, titik-titik tersebut tidak bisa diinterpolasi");
+        String outString;
+        outString="f(x) = ";
+        for (int i=aVals.length-1;i>0;i--){
+            outString+=(Float.toString(aVals[i])+"x^"+Integer.toString(i)+" + ");
+            result+=aVals[i]*Math.pow(x,i);
         }
-        else{
-            String outString;
-            outString="f(x) = ";
-            for (int i=aVals.length-1;i>0;i--){
-                outString+=(Float.toString(aVals[i]));
-                outString+=("x^"); 
-                outString+=(Integer.toString(i));
-                outString+=(" + ");
-                result+=aVals[i]*Math.pow(x,i);
-            }
             result+=aVals[0];
-            outString+=(Float.toString(aVals[0]));
-            outString+=(", f(");
-            outString+=(Float.toString(x));
-            outString+=(") = ");
-            outString+=(Float.toString(result));
+            outString+=(Float.toString(aVals[0])+", f("+Float.toString(x)+") = "+Float.toString(result));
             System.out.println(outString);
             System.out.print("Tulis hasil dalam file .txt? (y/n): ");
             String txt = sc.next();
@@ -35,7 +23,7 @@ public class PolynomialInterpolation{
             if(txt.equals("y") || txt.equals("Y")){
                 TXTReaderWriter.writeTXT(sc, outString);
             }
-        }
+        
     }
 
     public static Matrix keyInput(Scanner sc){
