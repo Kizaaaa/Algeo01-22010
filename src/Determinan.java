@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Determinan {
     public static float detCof(Matrix m){
         // jika matriks persegi
@@ -50,7 +52,7 @@ public class Determinan {
         float det = 1;
         if (m.row == m.col){
             for(int i=0;i<m.row;i++){
-                for(int j=0;j<m.col;j++){
+                for(int j=i+1;j<m.col;j++){
                     if(m.elmt(i, i) == 0){
                         int cek = i;
                         while(m.elmt(cek, i) == 0){
@@ -77,4 +79,16 @@ public class Determinan {
             return 69;
         }
     }
+
+    public static void main(String[] args){
+        Matrix m = new Matrix(3, 3);
+        Scanner sc = new Scanner(System.in);
+        m.readMatrix(sc);
+        System.out.println(Determinan.detOBE(m));
+    }
 }
+/*
+1 2 3
+2 5 3
+1 0 8
+ */
