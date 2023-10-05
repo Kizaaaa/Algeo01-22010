@@ -11,18 +11,18 @@ public class PolynomialInterpolation{
             outString+=(Float.toString(aVals[i])+"x^"+Integer.toString(i)+" + ");
             result+=aVals[i]*Math.pow(x,i);
         }
-            result+=aVals[0];
-            outString+=(Float.toString(aVals[0])+", f("+Float.toString(x)+") = "+Float.toString(result));
-            System.out.println(outString);
-            System.out.print("Tulis hasil dalam file .txt? (y/n): ");
-            String txt = sc.next();
-            while(!txt.equals("y") && !txt.equals("Y") && !txt.equals("n") && !txt.equals("N")){
-                System.out.print("Input tidak valid, silahkan input kembali: ");
-                txt = sc.next();
-            }
-            if(txt.equals("y") || txt.equals("Y")){
-                TXTReaderWriter.writeTXT(sc, outString);
-            }
+        result+=aVals[0];
+        outString+=(Float.toString(aVals[0])+", f("+Float.toString(x)+") = "+Float.toString(result));
+        System.out.println(outString);
+        System.out.print("Tulis hasil dalam file .txt? (y/n): ");
+        String txt = sc.next();
+        while(!txt.equals("y") && !txt.equals("Y") && !txt.equals("n") && !txt.equals("N")){
+            System.out.print("Input tidak valid, silahkan input kembali: ");
+            txt = sc.next();
+        }
+        if(txt.equals("y") || txt.equals("Y")){
+            TXTReaderWriter.writeTXT(sc, outString);
+        }
         
     }
 
@@ -34,8 +34,9 @@ public class PolynomialInterpolation{
         System.out.println("Masukkan "+n+" titik: \n(Format: (x0,y0), (x1,y1), ..., (xn,yn))");
         String line=sc.nextLine(); 
         String[] points=line.split(", ");
-        while(points.length!=n){
-            System.out.println("Input tidak valid, silahkan input kembali: ");
+        
+        while((points.length!=n)||(!arePointsUniqueS(points))){
+            System.out.println("Input tidak valid, silahkan input kembali");
             System.out.println("Masukkan "+n+" titik: \n(Format: (x0,y0), (x1,y1), ..., (xn,yn))");
             line=sc.nextLine(); 
             points=line.split(", ");
@@ -51,6 +52,63 @@ public class PolynomialInterpolation{
         return m;
     }
 
+    public static float findXn(Matrix m){
+        float Xn=m.elmt(0, 1); 
+        
+        //traversal hanya dilakukan di col 1 karena col 1 berisi x^1
+        for (int i=0;i<m.row;i++){
+            if (m.elmt(i, 1)>Xn){
+                Xn=m.elmt(i, 1);
+            }
+        }
+        return Xn;
+    }
+
+    public static float findX0(Matrix m){
+        float X0=m.elmt(0, 1); 
+        
+        //traversal hanya dilakukan di col 1 karena col 1 berisi x^1
+        for (int i=0;i<m.row;i++){
+            if (m.elmt(i, 1)<X0){
+                X0=m.elmt(i, 1);
+            }
+        }
+        return X0;
+    }
+
+    public static boolean arePointsUnique(Matrix m){
+        boolean unique=true;
+        int i,j;
+        i=0;
+        while ((i<m.row-1)&&(unique)){
+            j=i+1;
+            while ((j<m.row)&&(unique)){
+                if ((m.elmt(i, 0)==m.elmt(j, 0))&&(m.elmt(i, 1)==m.elmt(j, 1))){
+                    unique=false;
+                }
+                j+=1;
+            }
+            i+=1;
+        }
+        return unique;
+    }
+
+    public static boolean arePointsUniqueS(String[] s){
+        boolean unique=true;
+        int i=0,j=0;
+
+        while ((unique)&&i<s.length-1){
+            while((unique)&&j<s.length){
+                if (s[i]==s[j]){
+                    unique=false;
+                }
+                j+=1;
+            }
+            i+=1;
+        }
+        return unique;
+    }
+
     public static void main(Scanner sc){
         Matrix interpolationMatrix;
         float taksiran=0;
@@ -60,6 +118,11 @@ public class PolynomialInterpolation{
             interpolationMatrix=keyInput(sc);
             System.out.println("Masukkan nilai x yang akan ditaksir nilai fungsinya: ");
             taksiran=sc.nextFloat();
+            while (taksiran<findX0(interpolationMatrix) || taksiran>findXn(interpolationMatrix)){
+                System.out.println("Input tidak valid, silahkan input kembali");
+                System.out.println("Nilai x harus berada di antara x0 sampai xn");
+                taksiran=sc.nextFloat();
+            }
         }
         else{
             Matrix m = TXTReaderWriter.readTXT(sc);
@@ -72,6 +135,14 @@ public class PolynomialInterpolation{
                 interpolationMatrix.set(i,interpolationMatrix.col-1,m.element[i][1]);
             }
             taksiran=m.elmt(m.row-1, 0);
+            if (taksiran<findX0(interpolationMatrix) || taksiran>findXn(interpolationMatrix)){
+                System.out.println("Data tidak valid! Nilai x harus berada di antara x0 sampai xn");
+                return;
+            }
+            if (!arePointsUnique(m)){
+                System.out.println("Data tidak valid! Setiap titik harus berbeda");
+                return;
+            }
         }
         interpolation(interpolationMatrix,taksiran,sc);
     }
