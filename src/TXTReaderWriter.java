@@ -16,7 +16,7 @@ public class TXTReaderWriter {
         // try untuk mencoba mengakses nama file
         try {
             // declare var File
-            File txt = new File("test\\" + namaFile);
+            File txt = new File("..\\test\\" + namaFile);
 
             // scanner
             Scanner sizeScanner = new Scanner(txt);
@@ -60,7 +60,7 @@ public class TXTReaderWriter {
         // try untuk mencoba mengakses nama file
         try {
             // declare var File
-            File txt = new File("test\\" + namaFile);
+            File txt = new File("..\\test\\" + namaFile);
 
             // scanner
             Scanner sizeScanner = new Scanner(txt);
