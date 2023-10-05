@@ -77,41 +77,64 @@ public class Gauss {
             System.out.println("Tidak dapat mencari solusi SPL.");
             return failRet;
         } else if(barisnonzero < m.col - 1){
-            m.displayMatrix();
             String[] x = new String[m.col-1];
             String[] variabel = {"t","s","r","q","p","o","n","m","l","k"};
             int idxvariabel = 0;
             for(int i=barisnonzero-1;i>=0;i--){
-                int bukan0 = 0;
+                int satupertama = -1;
+                String temp = "";
                 for(j=m.col-2;j>=0;j--){
                     if(m.elmt(i, j) != 0){
-                        bukan0++;
+                        satupertama = j;
                     }
                 }
-                if(bukan0 == 1){
-                    for(j=m.col-2;j>=0;j--){
-                        if(m.elmt(i, j) != 0){
-                            x[j] = "" + m.elmt(i, m.col-1);
-                        }
-                    }
-                } else {
-                    for(j=m.col-2;j>=0;j--){
-                        if(m.elmt(i, j) != 0 && bukan0 > 1){
+                for(j=m.col-2;j>=satupertama;j--){
+                    if(m.elmt(i, j) != 0){
+                        if(j == satupertama){
+                            if(temp != ""){
+                                temp = temp.substring(2,temp.length());
+                                x[j] = m.elmt(i, m.col-1) + "-" + temp;
+                            }
+                            
+                        } else {
                             if(x[j] == null){
-                                
+                                x[j] = variabel[idxvariabel];
+                                idxvariabel++;
+                                temp += "+ (" + (m.elmt(i, j)) + "*(" + x[j] + "))";
+                            } else {
+                                temp += "+ (" + (m.elmt(i, j)) + "*(" + x[j] + "))";
                             }
                         }
                     }
                 }
             }
+            System.out.println("Hasil perhitungan menggunakan metode Gauss :");
             for(int i=0;i<m.col-1;i++){
                 System.out.print("x" + (i+1) + " : ");
                 if(x[i] == null){
-                    System.out.println("free");
-                } else {
-                    System.out.println(x[i]);
+                    x[i] = "free";
                 }
+                System.out.println(x[i]);
             }
+
+            System.out.print("Tulis hasil dalam file .txt? (y/n): ");
+            String txt = sc.next();
+            while(!txt.equals("y") && !txt.equals("Y") && !txt.equals("n") && !txt.equals("N")){
+                System.out.print("Input tidak valid, silahkan input kembali: ");
+                txt = sc.next();
+            }
+            if(txt.equals("y") || txt.equals("Y")){
+                String output = "";
+                for(int i=0;i<barisnonzero;i++){
+                    output = output.concat("x");
+                    output = output.concat(Integer.toString(i+1));
+                    output = output.concat(" : ");
+                    output = output.concat(x[i]);
+                    output = output.concat("\n");
+                }
+                TXTReaderWriter.writeTXT(sc, output);
+            }
+
             return failRet;
         } else {
             float[] x,y;
@@ -155,19 +178,6 @@ public class Gauss {
             return y;
         }
     }
-
-    public static void main(String[] args){
-        Matrix m = new Matrix(4, 6);
-        Scanner sc = new Scanner(System.in);
-        m.readMatrix(sc);
-        Gauss.f(m, sc);
-    }
-/*
-1 -1 0 0 1 3
-1 1 0 -3 0 6
-2 -1 0 1 -1 5
--1 2 0 -2 -1 -1
-*/
 
     public static double[] gaussNoText(MatrixDouble m, Scanner sc){
         double[] failRet = {6, 9};
