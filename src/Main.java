@@ -156,7 +156,7 @@ public class Main {
 		PolynomialInterpolation.f(sc);
 	}
 
-	public static void interpolasiBicubicHome(Scanner sc){ // buat interpolasi bicubic gan
+    public static void interpolasiBicubicHome(Scanner sc){ // buat interpolasi bicubic gan
 		System.out.println("Menu Interpolasi Bicubic Spine telah dipilih");
 
 		// di sini panggil fungsi interpolasi bicubic
