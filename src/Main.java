@@ -68,26 +68,26 @@ public class Main {
 		boolean exit = false;
 		
 		while (exit == false){
-			System.out.println("SISTEM PERSAMAAN LINEAR\n1. Metode eliminasi Gauss\n2. Metode eliminasi Gauss-Jordan\n3. Metode matriks balikan\n4. Kaidah cramer\n5. Kembali");
+			System.out.println("\nSISTEM PERSAMAAN LINEAR\n1. Metode eliminasi Gauss\n2. Metode eliminasi Gauss-Jordan\n3. Metode matriks balikan\n4. Kaidah cramer\n5. Kembali");
 			System.out.print("Silahkan pilih metode atau pilihan menu: "); 
 			input = cinCheck(sc, 1, 5);
 			System.out.println("Opsi " + input + " telah dipilih.");
 			switch (input){
 				case 1:
 					Matrix m1 = InputMatrixSPL(sc);
-					// gauss
+					Gauss.f(m1, sc);
 					break;
 				case 2:
 					Matrix m2 = InputMatrixSPL(sc);
-					// gauss-jordan
+					GaussJordan.f(m2, sc);
 					break;
 				case 3:
 					Matrix m3 = InputMatrixSPL(sc);
-					// metoda inverse
+					Balikan.f(m3, sc);
 					break;
 				case 4:
 					Matrix m4 = InputMatrixSPL(sc);
-					// metoda cramer
+					Cramer.f(m4, sc);
 					break;
 				case 5:
 					exit = true;
@@ -97,19 +97,55 @@ public class Main {
 	}
 
 	public static void detHome(Scanner sc){ // buat determinan gan
-		System.out.println("Menu Determinan telah dipilih");
+		int input = 0;
+		boolean exit = false;
 
-		Matrix m = InputMatrix(sc);
-		TXTReaderWriter.writeTXT(sc, TXTReaderWriter.castMatrixString(m));
-		// di sini panggil determinan,
+		while(exit == false){
+			System.out.println("\nDETERMINAN\n1. Metode Ekspansi Kofaktor\n2. Metode Reduksi Baris\n3. Kembali");
+			System.out.print("Silahkan pilih metode atau pilihan menu: "); 
+			input = cinCheck(sc, 1, 3);
+			System.out.println("Opsi " + input + " telah dipilih.");
+			switch (input){
+				case 1:
+					Matrix m1 = InputMatrix(sc);
+					float det1 = Determinan.detCof(m1);
+					System.out.println("Hasil perhitungan menggunakan metode Ekspansi Kofaktor :\nDeterminan : " + det1);
+					break;
+				case 2:
+					Matrix m2 = InputMatrix(sc);
+					float det2 = Determinan.detOBE(m2);
+					System.out.println("Hasil perhitungan menggunakan metode Reduksi Baris :\nDeterminan : " + det2);
+					break;
+				case 3:
+					exit = true;
+					break;
+			}
+		}
 	}
 
 	public static void inverseHome(Scanner sc){ // buat matriks balikan gan
-		System.out.println("Menu Matriks Balikan telah dipilih");
+		int input = 0;
+		boolean exit = false;
 
-		Matrix m = InputMatrix(sc);
-		// di sini panggil fungsi inverse
-
+		while(exit == false){
+			System.out.println("\nINVERSE\n1. Metode Ekspansi Kofaktor\n2. Metode Reduksi Baris\n3. Kembali");
+			System.out.print("Silahkan pilih metode atau pilihan menu: "); 
+			input = cinCheck(sc, 1, 3);
+			System.out.println("Opsi " + input + " telah dipilih.");
+			switch(input){
+				case 1:
+					Matrix m1 = InputMatrix(sc);
+					Inverse.inverseKof(m1, sc);
+					break;
+				case 2:
+					Matrix m2 = InputMatrix(sc);
+					Inverse.inverseObe(m2, sc);
+					break;
+				case 3:
+					exit = true;
+					break;
+			}
+		}
 	}
 
 	public static void interpolasiPolinomHome(Scanner sc){ // buat interpolasi polinom gan
