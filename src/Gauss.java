@@ -112,8 +112,8 @@ public class Gauss {
         }
     }
 
-    public static float[] gaussNoText(Matrix m, Scanner sc){
-        float[] failRet = {6, 9};
+    public static double[] gaussNoText(MatrixDouble m, Scanner sc){
+        double[] failRet = {6, 9};
         if(m.row < m.col-1){
             return failRet;
         } else { /* ubah matriks jadi matriks eselon */
@@ -171,9 +171,9 @@ public class Gauss {
                 }
             }
 
-            float[] x,y;
-            x = new float[barisnonzero];
-            y = new float[barisnonzero];
+            double[] x,y;
+            x = new double[barisnonzero];
+            y = new double[barisnonzero];
 
             if(barisanomali || barisnonzero < m.col - 1){
                 return failRet;
