@@ -61,7 +61,7 @@ public class BiSplineInterpolation {
         return r;
     }
 
-    public static void main(Scanner sc){
+    public static void f(Scanner sc){
         float a,b;
         Matrix readMat=TXTReaderWriter.readTXT(sc);        
         Matrix fVals=readF(sc, readMat);

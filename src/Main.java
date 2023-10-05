@@ -152,14 +152,14 @@ public class Main {
 		System.out.println("Menu Interpolasi Polinom telah dipilih");
 
 		// di sini panggil fungsi interpolasi polinom
-		PolynomialInterpolation.main(sc);
+		PolynomialInterpolation.f(sc);
 	}
 
 	public static void interpolasiBicubicHome(Scanner sc){ // buat interpolasi bicubic gan
 		System.out.println("Menu Interpolasi Bicubic Spine telah dipilih");
 
 		// di sini panggil fungsi interpolasi bicubic
-		BiSplineInterpolation.main(sc);
+		BiSplineInterpolation.f(sc);
 	}
 
 	public static void linearRegHome(Scanner sc){ // buat regresi linear gan
