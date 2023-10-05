@@ -48,6 +48,50 @@ public class TXTReaderWriter {
         return A;
     }
 
+    public static MatrixDouble readTXTD(Scanner sc){
+        MatrixDouble A = new MatrixDouble(0, 0);
+
+        // input nama file
+        String namaFile = "";
+        while (namaFile == ""){
+            System.out.print("Masukkan nama file: "); namaFile = sc.next();
+        } System.out.println("nama file yang dipilih: " + namaFile);
+
+        // try untuk mencoba mengakses nama file
+        try {
+            // declare var File
+            File txt = new File("test\\" + namaFile);
+
+            // scanner
+            Scanner sizeScanner = new Scanner(txt);
+            int rowSize = 0; while(sizeScanner.hasNextLine()){
+                rowSize++; sizeScanner.nextLine();
+            } sizeScanner.close();
+
+            // try untuk mencoba membaca string dari txt dan mengubahnya ke elemen2 matriks
+            int Arow = rowSize, Acol = 0; Scanner reader = new Scanner(txt); Scanner reader2 = new Scanner(txt);
+            try {
+                String line2 = reader2.nextLine();
+                String[] row2 = line2.split(" ");
+                Acol = row2.length;
+                A = new MatrixDouble(Arow, Acol);
+                for (int i = 0; i < rowSize; i++){
+                    String line = reader.nextLine();
+                    String[] row = line.split(" ");
+                    for (int j = 0; j < row.length; j++) A.set(i, j, Double.parseDouble(row[j]));
+                }
+            } finally {
+                // janlup close
+                reader2.close();
+                reader.close();
+            }
+        } catch (FileNotFoundException err){ // kalo ada error, pesan error nya taruh buat di print
+            System.out.println("error gan waktu parsing, error message: " + err);
+        }
+
+        return A;
+    }
+
     public static void writeTXT(Scanner sc, String str){
 
         // input nama file yang akan diwrite/dibuat
@@ -61,6 +105,7 @@ public class TXTReaderWriter {
             File txt = new File("test\\"+namaFile);
             FileWriter txtWrite = new FileWriter(txt, true);
             txtWrite.write(str);
+            txtWrite.write("\n");
             txtWrite.close();
             System.out.println("Writing file berhasil.");
         } catch (Exception err){ // kalo error
