@@ -111,7 +111,7 @@ public class GaussJordan {
                     }
                 }
             }
-            System.out.println("Hasil perhitungan menggunakan metode Gauss :");
+            System.out.println("Hasil perhitungan menggunakan metode Gauss Jordan :");
             for(int i=0;i<m.col-1;i++){
                 System.out.print("x" + (i+1) + " : ");
                 if(x[i] == null){
