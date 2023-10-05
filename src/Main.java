@@ -68,6 +68,7 @@ public class Main {
 		boolean exit = false;
 		
 		while (exit == false){
+			float[] ans = {4, 2, 0};
 			System.out.println("\nSISTEM PERSAMAAN LINEAR\n1. Metode eliminasi Gauss\n2. Metode eliminasi Gauss-Jordan\n3. Metode matriks balikan\n4. Kaidah cramer\n5. Kembali");
 			System.out.print("Silahkan pilih metode atau pilihan menu: "); 
 			input = cinCheck(sc, 1, 5);
@@ -75,11 +76,11 @@ public class Main {
 			switch (input){
 				case 1:
 					Matrix m1 = InputMatrixSPL(sc);
-					Gauss.f(m1, sc);
+					ans = Gauss.f(m1, sc);
 					break;
 				case 2:
 					Matrix m2 = InputMatrixSPL(sc);
-					GaussJordan.f(m2, sc);
+					ans = GaussJordan.f(m2, sc);
 					break;
 				case 3:
 					Matrix m3 = InputMatrixSPL(sc);

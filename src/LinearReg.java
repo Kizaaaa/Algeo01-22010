@@ -116,7 +116,7 @@ public class LinearReg {
                     for(int i=0;i<barisnonzero;i++){
                         y[i] = x[barisnonzero-i-1];
                     }
-                
+                    
                     String strout = "Didapat persamaan regresi linear: "; strout = strout.concat("f(x) = ");
                     for(int i=0;i<barisnonzero;i++){
                         if (y[i] != 0){
@@ -139,7 +139,8 @@ public class LinearReg {
                             sum += y[i+1]*arg; 
                             if (i == 0) strout = strout.concat(Float.toString(arg));
                             else strout = strout.concat("," + arg);
-                        } strout = strout.concat(") = " + sum);
+                        } sum = (float) Gauss.round((double) sum, 2);
+                        strout = strout.concat(") = " + sum);
                         System.out.println("Hasil yang didapat adalah = " + sum);
                     }                  
 
