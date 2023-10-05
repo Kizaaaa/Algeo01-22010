@@ -10,7 +10,7 @@ public class TXTReaderWriter {
         // input nama file
         String namaFile = "";
         while (namaFile == ""){
-            System.out.print("Masukkan nama file: "); namaFile = sc.nextLine();
+            System.out.print("Masukkan nama file: "); namaFile = sc.next();
         } System.out.println("nama file yang dipilih: " + namaFile);
 
         // try untuk mencoba mengakses nama file
